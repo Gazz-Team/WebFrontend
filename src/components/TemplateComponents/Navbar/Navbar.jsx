@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {NavbarRoutes} from '../../../routes/routes'
 import {NavLink, useLocation} from 'react-router-dom'
 import './Navbar.css'
 import {AllOpenRoutes} from '../../../routes/routes';
+import { AuthContext } from "../../../Auth";
+import * as controller from '../../../controller'
 
 const AllOpenRoutesPath = AllOpenRoutes.map(route=>route.path)
 
@@ -12,6 +14,8 @@ const Navbar = () => {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click)
+
+    const {currentUser} = useContext(AuthContext);
 
     if(AllOpenRoutesPath.includes(location.pathname)){
         return (
@@ -30,6 +34,13 @@ const Navbar = () => {
                                     <NavLink exact to = {NavbarRoutes[index].path} className='nav-links' onClick={handleClick} key={index}>{NavbarRoutes[index].label} </NavLink>
                                     )
                                 })
+                            }
+                            {
+                                currentUser 
+                                ?
+                                <a className='nav-links' onClick={()=>controller.handleLogout()} key={10}>Logout</a>
+                                :
+                                <NavLink exact to={"/login"} className='nav-links' key={10}>Login</NavLink>
                             }
                         </ul>
                         <div className="nav-icon"  onClick={handleClick}>
