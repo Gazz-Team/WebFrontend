@@ -1,8 +1,8 @@
 import Signup from "../pages/Auth/Signup"
 import Login from "../pages/Auth/Login"
-import About from "../pages/About/About"
 import Landing from "../pages/Landing/Landing"
-import Contact from "../pages/Contact/Contact"
+import Challenge from "../pages/Challenge/Challenge"
+import Teams from "../pages/Teams/Teams"
 
 
 const route = (label, path, component) => ({
@@ -18,24 +18,23 @@ export const LOGIN_PAGE = route('Login', '/login', Login)
 
 //Misal nanti ada page ini:
 export const LANDING_PAGE = route('Home', '/', Landing)
-export const ABOUT_PAGE = route('About us', '/about', About)
-export const CONTACT_PAGE = route('Contact us', '/contact', Contact)
+export const CHALLENGE_PAGE = route('Challenge', '/challenge', Challenge)
+export const TEAMS_PAGE = route('Teams', '/teams', Teams)
 
 
 export const AllPrivateRoutes = [
-
+    CHALLENGE_PAGE,
+    TEAMS_PAGE,
 ]
 
 export const AllOpenRoutes = [
     LANDING_PAGE,
     LOGIN_PAGE,
     SIGNUP_PAGE,
-    ABOUT_PAGE,
-    CONTACT_PAGE,
 ]
 
 export const NavbarRoutes = [
     LANDING_PAGE,
-    ABOUT_PAGE,
-    CONTACT_PAGE,
+    CHALLENGE_PAGE,
+    TEAMS_PAGE,
 ]

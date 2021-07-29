@@ -4,8 +4,9 @@ import {
   Route
 } from "react-router-dom";
 import Navbar from './components/TemplateComponents/Navbar/Navbar'
-import {AllOpenRoutes} from './routes/routes';
+import {AllOpenRoutes, AllPrivateRoutes} from './routes/routes';
 import { AuthProvider } from './Auth';
+import PrivateRoute from './PrivateRoute'
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Navbar />
-          {AllOpenRoutes.map(({path, component: Component})=>(
+            {AllOpenRoutes.map(({path, component: Component})=>(
                 <Route
                 exact
                 key={path}
@@ -22,6 +23,14 @@ function App() {
                 render={() => <Component />}
               />
               ))}
+            {AllPrivateRoutes.map(({path, component: Component})=>(
+              <PrivateRoute
+              exact
+              key={path}
+              path={path}
+              component={()=><Component/>}
+            />
+            ))}
         </Router>
       </AuthProvider>
     </div>

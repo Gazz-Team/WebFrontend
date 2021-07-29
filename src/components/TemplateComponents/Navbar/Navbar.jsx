@@ -17,40 +17,37 @@ const Navbar = () => {
 
     const {currentUser} = useContext(AuthContext);
 
-    if(AllOpenRoutesPath.includes(location.pathname)){
-        return (
-                <nav className="navbar">
-                    <div className="">
-                        <NavLink exact to='/' className='nav-logo'>
-                            EduChallenge
-                        </NavLink>
-                    </div>
-    
-                    <div className='navbar-content' >
-                        <ul className={click? 'nav-menu active' : 'nav-menu'}>
+    return (
+            <nav className="navbar">
+                <div className="">
+                    <NavLink exact to='/' className='nav-logo'>
+                        EduChallenge
+                    </NavLink>
+                </div>
+
+                <div className='navbar-content' >
+                    <ul className={click? 'nav-menu active' : 'nav-menu'}>
+                    {
+                        NavbarRoutes.map((item, index)=>{
+                            return (
+                                <NavLink exact to = {NavbarRoutes[index].path} className='nav-links' onClick={handleClick} key={index}>{NavbarRoutes[index].label} </NavLink>
+                                )
+                            })
+                        }
                         {
-                            NavbarRoutes.map((item, index)=>{
-                                return (
-                                    <NavLink exact to = {NavbarRoutes[index].path} className='nav-links' onClick={handleClick} key={index}>{NavbarRoutes[index].label} </NavLink>
-                                    )
-                                })
-                            }
-                            {
-                                currentUser 
-                                ?
-                                <a className='nav-links' onClick={()=>controller.handleLogout()} key={10}>Logout</a>
-                                :
-                                <NavLink exact to={"/login"} className='nav-links' key={10}>Login</NavLink>
-                            }
-                        </ul>
-                        <div className="nav-icon"  onClick={handleClick}>
-                            <i className={click? 'fas fa-times' : 'fas fa-bars'}></i>
-                        </div>
+                            currentUser 
+                            ?
+                            <a className='nav-links' onClick={()=>controller.handleLogout()} key={10}>Logout</a>
+                            :
+                            <NavLink exact to={"/login"} className='nav-links' key={10}>Login</NavLink>
+                        }
+                    </ul>
+                    <div className="nav-icon"  onClick={handleClick}>
+                        <i className={click? 'fas fa-times' : 'fas fa-bars'}></i>
                     </div>
-                </nav>
-        );
-    }
-    return <></>
+                </div>
+            </nav>
+    );
 }
 
 export default Navbar;
